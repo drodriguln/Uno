@@ -20,9 +20,8 @@ export class AppComponent {
     this.tricks.shuffle(this.deck);
   }
 
-  addToPile(e) {
-    this.pile.push(e);
-    console.log(e);
+  addToPile(card) {
+    this.pile.push(card);
     console.log(this.pile);
   }
 

@@ -1,9 +1,9 @@
-#deck li {
+#pile li {
   display: inline;
   list-style-type: none;
   padding: 10px 10px 10px 10px;
 }
 
-#deck img {
+#pile img {
   max-width: 180px;
 }

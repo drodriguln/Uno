@@ -1,15 +1,15 @@
-<div class="center">
-  <h1>UNO</h1>
-</div>
-
 <app-opponent class="center" [deck]="deck">
   [Loading Player's Hand]
 </app-opponent>
 
-<div id="deck" class="center">
+<div id="pile" class="center">
   <ul>
-    <li><img src="./assets/large/card_back_alt_large.png" /></li>
-    <li><img src="./assets/large/card_back_alt_large.png" /></li>
+    <li *ngIf="pile.length == 0">
+      <img src="./assets/large/card_back.png" />
+    </li>
+    <li *ngFor="let card of pile">
+      {{card.color}}
+    </li>
   </ul>
 </div>
 
