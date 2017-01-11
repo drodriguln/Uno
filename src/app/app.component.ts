@@ -10,15 +10,19 @@ import { TricksService } from './tricks.service';
 
 export class AppComponent {
 
-  deck: Object[] = [];
-  hand: Object[] = [];
+  deck:         Object[] = [];
+  opponentHand: Object[] = [];
 
     constructor(private tricks: TricksService) { }
 
     ngOnInit() {
         this.tricks.buildDeck(this.deck);
         this.tricks.shuffle(this.deck);
-        this.tricks.dealCards(this.hand, this.deck);
+        //
+    }
+
+    logMe() {
+      console.log(this.deck.length);
     }
 
 }

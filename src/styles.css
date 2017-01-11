@@ -2,3 +2,9 @@
 .center {
   text-align: center;
 }
+
+#hand li {
+  display: inline;
+  list-style-type: none;
+  padding: 5px 5px 5px 5px;
+}

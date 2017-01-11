@@ -2,10 +2,16 @@
   <h1>UNO</h1>
 </div>
 
-<div id="hand" class="center">
-  <ul>
-    <li *ngFor="let card of hand">
-      <img src="./assets/small/{{card.file}}" />
-    </li>
-  </ul>
-</div>
+<app-opponent class="center" [deck]="deck">
+  [Loading Player's Hand]
+</app-opponent>
+
+<app-pile class="center">
+  [Loading Pile]
+</app-pile>
+
+<app-player class="center" [deck]="deck">
+  [Loading Player's Hand]
+</app-player>
+
+<button (click)="logMe()">Click Me!</button>
