@@ -2,27 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { TricksService } from './tricks.service';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [TricksService]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  providers: [TricksService]
 })
 
 export class AppComponent {
 
-  deck:         Object[] = [];
-  opponentHand: Object[] = [];
+  deck: Object[] = [];
+  pile: Object[] = [];
 
-    constructor(private tricks: TricksService) { }
+  constructor(private tricks: TricksService) { }
 
-    ngOnInit() {
-        this.tricks.buildDeck(this.deck);
-        this.tricks.shuffle(this.deck);
-        //
-    }
+  ngOnInit() {
+    this.tricks.buildDeck(this.deck);
+    this.tricks.shuffle(this.deck);
+  }
 
-    logMe() {
-      console.log(this.deck.length);
-    }
+  addToPile(e) {
+    this.pile.push(e);
+    console.log(e);
+    console.log(this.pile);
+  }
 
 }

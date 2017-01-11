@@ -27,15 +27,15 @@ export class TricksService {
       let color: string;
 
       //Add zero-valued cards.
-      cards.push({ color: 'Red',    value: 0, file: 'red_0.png' });
-      cards.push({ color: 'Yellow', value: 0, file: 'yellow_0.png' });
-      cards.push({ color: 'Green',  value: 0, file: 'green_0.png' });
-      cards.push({ color: 'Blue',   value: 0, file: 'blue_0.png' });
+      cards.push({ color: 'Red',    value: 0, file: 'Red_0.png' });
+      cards.push({ color: 'Yellow', value: 0, file: 'Yellow_0.png' });
+      cards.push({ color: 'Green',  value: 0, file: 'Green_0.png' });
+      cards.push({ color: 'Blue',   value: 0, file: 'Blue_0.png' });
 
       //Add wild cards.
       for (let i = 1; i <= 4; i++) {
-        cards.push({ color: 'Wild', value: 'Wild',      file: 'wild_color_changer.png' });
-        cards.push({ color: 'Wild', value: 'Draw Four', file: 'wild_pick_four.png' });
+        cards.push({ color: 'Wild', value: 'Wild',      file: 'Wild_Color_Changer.png' });
+        cards.push({ color: 'Wild', value: 'Draw Four', file: 'Wild_Pick_Four.png' });
       }
 
       //Add rest of the cards to the deck based on modulus of for-loop index.
@@ -49,11 +49,11 @@ export class TricksService {
 
         //Assign value based on modulus.
         if (i % 12 == 10) {
-          cards.push({ color: color, value: 'Skip',     file: color + '_skip.png' });
+          cards.push({ color: color, value: 'Skip',     file: color + '_Skip.png' });
         } else if (i % 12 == 11) {
-          cards.push({ color: color, value: 'Reverse',  file: color + '_reverse.png' });
+          cards.push({ color: color, value: 'Reverse',  file: color + '_Reverse.png' });
         } else if (i % 12 == 12) {
-          cards.push({ color: color, value: 'Draw Two', file: color + '_pick_two.png' });
+          cards.push({ color: color, value: 'Draw Two', file: color + '_Pick_Two.png' });
         } else {
           cards.push({ color: color, value: i % 12,     file: color + '_' + (i % 12) + '.png' });
         }

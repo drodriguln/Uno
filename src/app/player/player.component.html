@@ -1,7 +1,7 @@
 <div id="hand" >
   <ul>
-    <li *ngFor="let card of hand">
-      <img src="./assets/small/{{card.file}}" />
+    <li *ngFor="let card of hand; let i = index">
+      <img (click)="placeCard(i)" src="./assets/small/{{card.file}}" />
     </li>
   </ul>
 </div>

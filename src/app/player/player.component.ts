@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TricksService } from '../tricks.service';
+import { AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-player',
@@ -10,13 +11,18 @@ export class PlayerComponent implements OnInit {
 
   hand: Object[] = [];
 
-  @Input('deck')
-  deck: Object[];
+  @Input() deck: Object[];
+  @Output() addToPile = new EventEmitter();
 
   constructor(private tricks: TricksService) { }
 
   ngOnInit() {
     this.tricks.dealCards(this.hand, this.deck);
+  }
+
+  placeCard(index: number) {
+    console.log(index);
+    this.addToPile.emit(this.hand.splice(index, 1));
   }
 
 }

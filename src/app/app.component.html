@@ -6,12 +6,13 @@
   [Loading Player's Hand]
 </app-opponent>
 
-<app-pile class="center">
-  [Loading Pile]
-</app-pile>
+<div id="deck" class="center">
+  <ul>
+    <li><img src="./assets/large/card_back_alt_large.png" /></li>
+    <li><img src="./assets/large/card_back_alt_large.png" /></li>
+  </ul>
+</div>
 
-<app-player class="center" [deck]="deck">
+<app-player (addToPile)="addToPile($event)" class="center" [deck]="deck">
   [Loading Player's Hand]
 </app-player>
-
-<button (click)="logMe()">Click Me!</button>
