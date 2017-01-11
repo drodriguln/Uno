@@ -1,0 +1,8 @@
+li {
+  display: inline;
+  list-style-type: none;
+}
+
+img {
+  max-width: 180px;
+}

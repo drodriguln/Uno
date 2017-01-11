@@ -1,17 +1,12 @@
+{{pile.color}}
+
 <app-opponent class="center" [deck]="deck">
   [Loading Player's Hand]
 </app-opponent>
 
-<div id="pile" class="center">
-  <ul>
-    <li *ngIf="pile.length == 0">
-      <img src="./assets/large/card_back.png" />
-    </li>
-    <li *ngFor="let card of pile">
-      {{card.color}}
-    </li>
-  </ul>
-</div>
+<app-pile class="center" [topCard]="topCard">
+  [Loading Pile]
+</app-pile>
 
 <app-player (addToPile)="addToPile($event)" class="center" [deck]="deck">
   [Loading Player's Hand]

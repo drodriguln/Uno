@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { OpponentComponent } from './opponent/opponent.component';
+import { PileComponent } from './pile/pile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerComponent,
-    OpponentComponent
+    OpponentComponent,
+    PileComponent
   ],
   imports: [
     BrowserModule,

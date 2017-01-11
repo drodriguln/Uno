@@ -21,7 +21,6 @@ export class PlayerComponent implements OnInit {
   }
 
   placeCard(index: number) {
-    console.log(index);
     this.addToPile.emit(this.hand.splice(index, 1));
   }
 
