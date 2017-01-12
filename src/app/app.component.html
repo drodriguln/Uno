@@ -1,8 +1,8 @@
-<app-opponent class="center" [deck]="deck" [topCard]="topCard" (opponentDone)="opponentDone($event)">
+<app-opponent class="center" [deck]="deck" [topCard]="topCard" [pileSize]="pile.length" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event)">
   [Loading Opponent's Hand]
 </app-opponent>
 
-<app-pile class="center" [topCard]="topCard">
+<app-pile class="center" [topCard]="topCard" [pileSize]="pile.length">
   [Loading Pile]
 </app-pile>
 
