@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TricksService } from './tricks.service';
 
 @Component({
@@ -21,7 +21,12 @@ export class AppComponent {
     this.tricks.shuffle(this.deck);
   }
 
-  addToPile(card) {
+  playerDone(card) {
+    this.pile.push(card[0]);
+    this.topCard = card[0];
+  }
+
+  opponentDone(card) {
     this.pile.push(card[0]);
     this.topCard = card[0];
   }

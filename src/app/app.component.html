@@ -1,13 +1,11 @@
-{{pile.color}}
-
-<app-opponent class="center" [deck]="deck">
-  [Loading Player's Hand]
+<app-opponent class="center" [deck]="deck" [topCard]="topCard" (opponentDone)="opponentDone($event)">
+  [Loading Opponent's Hand]
 </app-opponent>
 
 <app-pile class="center" [topCard]="topCard">
   [Loading Pile]
 </app-pile>
 
-<app-player (addToPile)="addToPile($event)" class="center" [deck]="deck">
+<app-player class="center" [deck]="deck" (playerDone)="playerDone($event)">
   [Loading Player's Hand]
 </app-player>

@@ -9,10 +9,10 @@ import { AppComponent} from '../app.component';
 })
 export class PlayerComponent implements OnInit {
 
-  hand: Object[] = [];
-
   @Input() deck: Object[];
-  @Output() addToPile = new EventEmitter();
+  @Output() playerDone = new EventEmitter();
+
+  hand: Object[] = [];
 
   constructor(private tricks: TricksService) { }
 
@@ -21,7 +21,7 @@ export class PlayerComponent implements OnInit {
   }
 
   placeCard(index: number) {
-    this.addToPile.emit(this.hand.splice(index, 1));
+    this.playerDone.emit(this.hand.splice(index, 1));
   }
 
 }
