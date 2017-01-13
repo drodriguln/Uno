@@ -9,19 +9,30 @@ import { AppComponent} from '../app.component';
 })
 export class PlayerComponent implements OnInit {
 
-  @Input() deck: Object[];
-  @Output() playerDone = new EventEmitter();
-
-  hand: Object[] = [];
+  hand = [];                                 //The hand object array for the player.
+  @Input() isOpponentsTurn: boolean;         //Check if player's turn has ended.
+  @Input() deck: Object[];                   //Receives deck object array from parent for dealing and drawing.
+  @Input() topCard;                          //Received topCard object to determine card plays.
+  @Output() playerDone = new EventEmitter(); //Tells the parent when the turn has finished.
 
   constructor(private tricks: TricksService) { }
 
   ngOnInit() {
+    //Deal first cards from the deck to the player's hand through the Tricks service.
     this.tricks.dealCards(this.hand, this.deck);
   }
 
-  placeCard(index: number) {
-    this.playerDone.emit(this.hand.splice(index, 1));
+  placeCard(i: number) {
+    //Prevent player from placing any more cards during opponent's turn.
+    if (!this.isOpponentsTurn) {
+      //If either the selected card is a matched value or color of the top card in the pile.
+      if (this.topCard.value == this.hand[i].value || this.topCard.color == this.hand[i].color) {
+        //Notifies the parent that the opponent's turn has ended,
+        //and sends the selected card from the hand to the deck.
+        this.playerDone.emit(this.hand.splice(i, 1));
+      }
+    }
   }
+
 
 }
