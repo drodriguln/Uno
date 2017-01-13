@@ -14,7 +14,7 @@ export class TricksService {
   }
 
   //Draw first card for the pile from deck.
-  getFirstTopCard(deck: Object[]) {
+  drawCard(deck: Object[]) {
     return deck.pop(); //Return the top card of deck object.
   }
 

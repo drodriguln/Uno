@@ -1,6 +1,6 @@
 <h1 class="center">{{announcer}}</h1>
 
-<app-opponent class="center" [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event)">
+<app-opponent class="center" [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event, isTurn)">
   [Loading Opponent's Hand]
 </app-opponent>
 
