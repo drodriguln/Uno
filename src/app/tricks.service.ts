@@ -15,7 +15,9 @@ export class TricksService {
 
   //Draw first card for the pile from deck.
   drawCard(deck: Object[]) {
-    return deck.pop();
+    if (deck.length > 0) {
+      return deck.pop();
+    }
   }
 
   //Draw the first 7 cards from the deck.

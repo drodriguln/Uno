@@ -4,12 +4,15 @@
   [Loading Opponent's Hand]
 </app-opponent>
 
-<div>
-  <img src="./assets/large/{{topCard.file}}" />
-</div>
-<p>
-  Cards in Deck: {{deck.length}} | Cards in Pile: {{pile.length}}
-</p>
+<ul>
+  <li>
+    <img src="./assets/large/{{topCard.file}}" />
+  </li>
+  <li>
+    <img (click)="drawPlayerCard()" src="./assets/large/Card_Back_Alt.png" />
+  </li>
+</ul>
+
 
 <app-player [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (playerDone)="playerDone($event)" (playerWon)="playerWon($event)">
   [Loading Player's Hand]

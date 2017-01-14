@@ -23,7 +23,7 @@ export class PlayerComponent implements OnInit {
     this.tricks.dealCards(this.hand, this.deck);
   }
 
-  drawPlayerCard() {
+  receiveCardFromParent() {
     //Draw a card to the player's hand.
     this.hand.push(this.tricks.drawCard(this.deck));
   }
