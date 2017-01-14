@@ -14,8 +14,22 @@ export class TricksService {
   }
 
   //Draw first card for the pile from deck.
-  drawCard(deck: Object[]) {
-    return deck.pop(); //Return the top card of deck object.
+  drawCard(deck: Object[], pile: Object[], topCard: Object) {
+    if (deck.length < 1) {
+      console.log('regular - draw: ' + deck.length);
+      return deck.pop(); //Return the top card of deck object.
+    } else {
+      pile.pop() //Remove top card.
+      console.log(deck);
+      deck = deck.concat(pile);
+      console.log(deck);
+      pile.splice(0, pile.length - 2);
+      this.shuffleCards(deck);
+      console.log(deck);
+      console.log('out of cards - draw: new deck=' + deck.length);
+      console.log('out of cards - draw: new pile=' + pile.length);
+      return deck.pop();
+    }
   }
 
   //Draw the first 7 cards from the deck.
@@ -25,7 +39,7 @@ export class TricksService {
     }
   }
 
-  //Adds 92 Uno cards to the deck object (108 regular cards without 8 draw two, 4 draw four, and 4 wild cards).
+  //Adds 84 Uno cards to the deck object (108 regular cards without 8 reverses, 8 draw two, 4 draw four, and 4 wild cards).
   buildDeck(cards: Object[]) {
 
     //Declare variable to store color value in the for-loop below.
@@ -58,7 +72,7 @@ export class TricksService {
       if (i % 12 == 10) {
         cards.push({ color: color, value: 'Skip',     file: color + '_Skip.png' });
       } else if (i % 12 == 11) {
-        cards.push({ color: color, value: 'Reverse',  file: color + '_Reverse.png' });
+        //cards.push({ color: color, value: 'Reverse',  file: color + '_Reverse.png' });
       } else if (i % 12 == 0) {
         //cards.push({ color: color, value: 'Draw Two', file: color + '_Picker.png' });
       } else {

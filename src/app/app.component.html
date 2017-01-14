@@ -1,13 +1,16 @@
 <h1>{{announcer}}</h1>
 
-<app-opponent [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event, isTurn)">
+<app-opponent [deck]="deck" [pile]="pile" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event)" (opponentWon)="opponentWon($event)">
   [Loading Opponent's Hand]
 </app-opponent>
 
-<app-pile class="center" [topCard]="topCard" [pileSize]="pile.length">
-  [Loading Pile]
-</app-pile>
+<div>
+  <img src="./assets/large/{{topCard.file}}" />
+</div>
+<p>
+  Cards in Deck: {{deck.length}} | Cards in Pile: {{pile.length}}
+</p>
 
-<app-player [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (playerDone)="playerDone($event)">
+<app-player [deck]="deck" [pile]="pile" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (playerDone)="playerDone($event)" (playerWon)="playerWon($event)">
   [Loading Player's Hand]
 </app-player>
