@@ -25,7 +25,7 @@ export class TricksService {
     }
   }
 
-  //Adds 108 Uno cards to the deck object.
+  //Adds 92 Uno cards to the deck object (108 regular cards without 8 draw two, 4 draw four, and 4 wild cards).
   buildDeck(cards: Object[]) {
 
     //Declare variable to store color value in the for-loop below.
@@ -37,11 +37,13 @@ export class TricksService {
     cards.push({ color: 'Green',  value: 0, file: 'Green_0.png' });
     cards.push({ color: 'Blue',   value: 0, file: 'Blue_0.png' });
 
+    /*
     //Add wild cards.
     for (let i = 1; i <= 4; i++) {
       cards.push({ color: 'Wild', value: 'Wild',      file: 'Wild_Color_Changer.png' });
       cards.push({ color: 'Wild', value: 'Draw Four', file: 'Wild_Pick_Four.png' });
     }
+    */
 
     //Add rest of the cards to the deck based on modulus of for-loop index.
     for (let i = 1; i <= 96; i++) {
@@ -57,8 +59,8 @@ export class TricksService {
         cards.push({ color: color, value: 'Skip',     file: color + '_Skip.png' });
       } else if (i % 12 == 11) {
         cards.push({ color: color, value: 'Reverse',  file: color + '_Reverse.png' });
-      } else if (i % 12 == 12) {
-        cards.push({ color: color, value: 'Draw Two', file: color + '_Pick_Two.png' });
+      } else if (i % 12 == 0) {
+        //cards.push({ color: color, value: 'Draw Two', file: color + '_Picker.png' });
       } else {
         cards.push({ color: color, value: i % 12,     file: color + '_' + (i % 12) + '.png' });
       }

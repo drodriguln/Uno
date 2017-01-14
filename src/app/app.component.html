@@ -1,6 +1,6 @@
-<h1 class="center">{{announcer}}</h1>
+<h1>{{announcer}}</h1>
 
-<app-opponent class="center" [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event, isTurn)">
+<app-opponent [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (opponentDone)="opponentDone($event, isTurn)">
   [Loading Opponent's Hand]
 </app-opponent>
 
@@ -8,6 +8,6 @@
   [Loading Pile]
 </app-pile>
 
-<app-player class="center" [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (playerDone)="playerDone($event)">
+<app-player [deck]="deck" [topCard]="topCard" [isOpponentsTurn]="isOpponentsTurn" (playerDone)="playerDone($event)">
   [Loading Player's Hand]
 </app-player>

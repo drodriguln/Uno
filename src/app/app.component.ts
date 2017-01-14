@@ -14,14 +14,19 @@ export class AppComponent {
   isOpponentsTurn: boolean = false;                        //Check if player's turn has ended.
   deck: Object[] = [];                                     //The deck object array for dealing and drawing for children.
   pile: Object[] = [];                                     //The card pile object where the cards are played.
-  topCard: Object;                                         //Initialize the card last placed in the pile object.
+  topCard;                                         //Initialize the card last placed in the pile object.
 
   constructor(private tricks: TricksService, private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
     this.tricks.buildDeck(this.deck);                      //Adds standard 108 Uno cards to deck object.
+    console.log(this.deck.length);
     this.tricks.shuffleCards(this.deck);                   //Shuffles items in deck object.
     this.topCard = this.tricks.drawCard(this.deck);        //Places next card in deck in the card pile.
+  }
+
+  specifyWildColor(color: string) {
+    this.topCard.color = color;
   }
 
   //Execute when player has picked a card in the player component.
