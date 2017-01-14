@@ -11,7 +11,6 @@ export class OpponentComponent implements OnInit {
   hand = [];                                   //The hand object array for the opponent.
   @Input() isOpponentsTurn: boolean;           //Check if player's turn has ended.
   @Input() deck: Object[];                     //Receives deck object array from parent for dealing and drawing.
-  @Input() pile: Object[];                   //Receives pile object from parent for potential use in the drawCard service.
   @Input() topCard;                            //Received topCard object to determine card plays.
   @Output() opponentDone = new EventEmitter(); //Tells the parent when the turn has finished.
   @Output() opponentWon = new EventEmitter();  //Tells the parent when the opponent has run out of cards.
@@ -49,7 +48,7 @@ export class OpponentComponent implements OnInit {
         }
         //If no cards in opponent's hand can be played, draw a card from the deck.
         else if (this.isOpponentsTurn && i == (this.hand.length - 1) ) {
-          this.hand.push(this.tricks.drawCard(this.deck, this.pile, this.topCard));
+          this.hand.push(this.tricks.drawCard(this.deck));
         }
       }
     }

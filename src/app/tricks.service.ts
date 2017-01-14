@@ -14,22 +14,8 @@ export class TricksService {
   }
 
   //Draw first card for the pile from deck.
-  drawCard(deck: Object[], pile: Object[], topCard: Object) {
-    if (deck.length < 1) {
-      console.log('regular - draw: ' + deck.length);
-      return deck.pop(); //Return the top card of deck object.
-    } else {
-      pile.pop() //Remove top card.
-      console.log(deck);
-      deck = deck.concat(pile);
-      console.log(deck);
-      pile.splice(0, pile.length - 2);
-      this.shuffleCards(deck);
-      console.log(deck);
-      console.log('out of cards - draw: new deck=' + deck.length);
-      console.log('out of cards - draw: new pile=' + pile.length);
-      return deck.pop();
-    }
+  drawCard(deck: Object[]) {
+    return deck.pop();
   }
 
   //Draw the first 7 cards from the deck.

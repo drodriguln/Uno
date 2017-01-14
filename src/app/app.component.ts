@@ -19,7 +19,7 @@ export class AppComponent {
   constructor(private tricks: TricksService, private cdRef:ChangeDetectorRef) { }
 
 //WISHLIST:
-// - Reshuffle deck at length = 0
+// - Remove "pile" object in favor of one face up card, and only deck object.
 // - (SEEMS TO WORK NOW?) opponent’s skip needs to work.
 // - stop game at win
 // - try to combine event emitters: "done" and "won"
@@ -27,12 +27,8 @@ export class AppComponent {
   ngOnInit() {
     this.tricks.buildDeck(this.deck);                      //Adds 84 of 108 Uno cards to deck object.
     this.tricks.shuffleCards(this.deck);                   //Shuffles items in deck object.
-    this.topCard = this.tricks.drawCard(this.deck, this.pile, this.topCard);        //Places next card in deck in the card pile.
+    this.topCard = this.tricks.drawCard(this.deck);        //Places next card in deck in the card pile.
     this.pile = [this.topCard];
-  }
-
-  specifyWildColor(color: string) {
-    this.topCard.color = color;
   }
 
   //Execute when player has picked a card in the player component.

@@ -12,7 +12,6 @@ export class PlayerComponent implements OnInit {
   hand = [];                                 //The hand object array for the player.
   @Input() isOpponentsTurn: boolean;         //Check if player's turn has ended.
   @Input() deck: Object[];                   //Receives deck object array from parent for dealing and drawing.
-  @Input() pile: Object[];                   //Receives pile object from parent for potential use in the drawCard service.
   @Input() topCard;                          //Received topCard object to determine card plays.
   @Output() playerDone = new EventEmitter(); //Tells the parent when the turn has finished.
   @Output() playerWon = new EventEmitter();  //Tells the parent when the player has run out of cards.
@@ -26,7 +25,7 @@ export class PlayerComponent implements OnInit {
 
   drawPlayerCard() {
     //Draw a card to the player's hand.
-    this.hand.push(this.tricks.drawCard(this.deck, this.pile, this.topCard));
+    this.hand.push(this.tricks.drawCard(this.deck));
   }
 
   placeCard(i: number) {
