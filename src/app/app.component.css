@@ -1,9 +1,19 @@
 li {
   display: inline;
   list-style-type: none;
-  padding: 10px 10px 10px 10px;
 }
 
 img {
-  max-width: 140px;
+  max-width: 145px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.panel-body-background-blue {
+  background: #dbe7f1;
+}
+
+.panel-body-background-gray {
+  	background: #F8F8F8
 }

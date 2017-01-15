@@ -71,4 +71,47 @@ export class TricksService {
 
   }
 
+  sortHandColorValueService(hand) {
+    let redHandValues = [];
+    let yellowHandValues = [];
+    let greenHandValues = [];
+    let blueHandValues = [];
+
+    for (let i = 0; i < hand.length; i++) {
+      if (hand[i].color == 'Red') {
+        redHandValues.push(hand[i].value);
+      } else if (hand[i].color == 'Yellow') {
+        yellowHandValues.push(hand[i].value);
+      } else if (hand[i].color == 'Green') {
+        greenHandValues.push(hand[i].value);
+      } else if (hand[i].color == 'Blue') {
+        blueHandValues.push(hand[i].value);
+      }
+    }
+
+    redHandValues.sort().reverse();
+    yellowHandValues.sort().reverse();
+    greenHandValues.sort().reverse();
+    blueHandValues.sort().reverse();
+
+    let filteredHand = []
+
+
+    for (let i = 0; i < blueHandValues.length; i++) {
+      filteredHand.push({color: 'Blue', value: blueHandValues[i], file: 'Blue_' + blueHandValues[i] + '.png'})
+    }
+    for (let i = 0; i < greenHandValues.length; i++) {
+      filteredHand.push({color: 'Green', value: greenHandValues[i], file: 'Green_' + greenHandValues[i] + '.png'})
+    }
+    for (let i = 0; i < yellowHandValues.length; i++) {
+      filteredHand.push({color: 'Yellow', value: yellowHandValues[i], file: 'Yellow_' + yellowHandValues[i] + '.png'})
+    }
+    for (let i = 0; i < redHandValues.length; i++) {
+      filteredHand.push({color: 'Red', value: redHandValues[i], file: 'Red_' + redHandValues[i] + '.png'})
+    }
+
+    return filteredHand;
+
+  }
+
 }

@@ -24,15 +24,13 @@ export class AppComponent {
 //WISHLIST:
 // - (DONE) Remove "pile" object in favor of one face up card, and only deck object.
 // - (DONE) opponent’s skip needs to work.
-// - Implement Twitter Bootstrap.
+// - (DONE) Implement Twitter Bootstrap.
+// - (DONE) Fix centering problem in view.
+// - (DONE) Sort button for hand by color, value.
+// - (NOPE) Autosort, and indicate what the newest-drawn cards are.
+// - Fix centering for player's panel heading.
 // - stop game at win
 // - try to combine event emitters: "done" and "won"
-
-  drawPlayerCard() {
-    if (!this.isOpponentsTurn) {
-      this.player.receiveCardFromParent();
-    }
-  }
 
   ngOnInit() {
     this.tricks.buildDeck(this.deck);                      //Adds 84 of 108 Uno cards to deck object.
@@ -77,6 +75,16 @@ export class AppComponent {
   opponentWon(e) {
     console.log('opponent has won');
     this.announcer = 'THE OPPONENT HAS WON THE MATCH'
+  }
+
+  drawPlayerCard() {
+    if (!this.isOpponentsTurn) {
+      this.player.receiveCardFromParent();
+    }
+  }
+
+  sortPlayerHand() {
+    this.player.sortHand();
   }
 
 }

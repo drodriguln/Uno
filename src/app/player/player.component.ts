@@ -48,5 +48,8 @@ export class PlayerComponent implements OnInit {
     }
   }
 
+  sortHand() {
+    this.hand = this.tricks.sortHandColorValueService(this.hand);
+  }
 
 }

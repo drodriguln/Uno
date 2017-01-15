@@ -1,7 +1,7 @@
 <div id="hand">
-  <ul>
-    <li *ngFor="let card of hand; let i = index">
-      <img (click)="placeCard(i)" src="./assets/small/{{card.file}}" />
+  <ul class="list-inline center-block text-center list-inline gallery">
+    <li *ngFor="let card of hand | reverse; let i = index">
+      <img class="zoom" (click)="placeCard(hand.length - 1 - i)" src="./assets/{{card.file}}" />
     </li>
   </ul>
 </div>
