@@ -1,10 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
+html, body, .panel-background-gray {
+  background: #F0EFEF;
+}
+
 .horizontal-scrollbar {
   white-space: nowrap;
   overflow-y: hidden;
   overflow-x: scroll;
 }
+
+/*
+Card animation when loading, sorting, and drawing.
+*/
+
+@keyframes CardMove {
+  0% {
+    transform: translateY(-150%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.card-move {
+  animation: CardMove 0.65s;
+}
+
 
 /*
 THE ANIMATION STYLES BELOW WERE BORROWED FROM:

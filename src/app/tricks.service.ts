@@ -42,76 +42,71 @@ export class TricksService {
     /*
     //Add wild cards.
     for (let i = 1; i <= 4; i++) {
-      cards.push({ color: 'Wild', value: 'Wild',      file: 'Wild_Color_Changer.png' });
-      cards.push({ color: 'Wild', value: 'Draw Four', file: 'Wild_Pick_Four.png' });
-    }
-    */
+    cards.push({ color: 'Wild', value: 'Wild',      file: 'Wild_Color_Changer.png' });
+    cards.push({ color: 'Wild', value: 'Draw Four', file: 'Wild_Pick_Four.png' });
+  }
+  */
 
-    //Add rest of the cards to the deck based on modulus of for-loop index.
-    for (let i = 1; i <= 96; i++) {
+  //Add rest of the cards to the deck based on modulus of for-loop index.
+  for (let i = 1; i <= 96; i++) {
 
-      //Change color value after every 24 cards.
-      if (i <= 24)      { color = 'Red';    }
-      else if (i <= 48) { color = 'Yellow'; }
-      else if (i <= 72) { color = 'Green';  }
-      else if (i <= 96) { color = 'Blue';   }
+    //Change color value after every 24 cards.
+    if (i <= 24)      { color = 'Red';    }
+    else if (i <= 48) { color = 'Yellow'; }
+    else if (i <= 72) { color = 'Green';  }
+    else if (i <= 96) { color = 'Blue';   }
 
-      //Assign value based on modulus.
-      if (i % 12 == 10) {
-        cards.push({ color: color, value: 'Skip',     file: color + '_Skip.png' });
-      } else if (i % 12 == 11) {
-        //cards.push({ color: color, value: 'Reverse',  file: color + '_Reverse.png' });
-      } else if (i % 12 == 0) {
-        //cards.push({ color: color, value: 'Draw Two', file: color + '_Picker.png' });
-      } else {
-        cards.push({ color: color, value: i % 12,     file: color + '_' + (i % 12) + '.png' });
-      }
-
+    //Assign value based on modulus.
+    if (i % 12 == 10) {
+      cards.push({ color: color, value: 'Skip',     file: color + '_Skip.png' });
+    } else if (i % 12 == 11) {
+      //cards.push({ color: color, value: 'Reverse',  file: color + '_Reverse.png' });
+    } else if (i % 12 == 0) {
+      //cards.push({ color: color, value: 'Draw Two', file: color + '_Picker.png' });
+    } else {
+      cards.push({ color: color, value: i % 12,     file: color + '_' + (i % 12) + '.png' });
     }
 
   }
 
-  sortHandColorValueService(hand) {
-    let redHandValues = [];
-    let yellowHandValues = [];
-    let greenHandValues = [];
-    let blueHandValues = [];
+}
 
-    for (let i = 0; i < hand.length; i++) {
-      if (hand[i].color == 'Red') {
-        redHandValues.push(hand[i].value);
-      } else if (hand[i].color == 'Yellow') {
-        yellowHandValues.push(hand[i].value);
-      } else if (hand[i].color == 'Green') {
-        greenHandValues.push(hand[i].value);
-      } else if (hand[i].color == 'Blue') {
-        blueHandValues.push(hand[i].value);
+sortByKey(array, key) {
+
+  //Need to convert 'Skip' value to 10 to allow numerical filtering,
+  //then convert back to 'Skip' from 10 before returning array.
+
+  if (key == 'color') {
+    return array.sort(function(a, b) {
+      var x = a.color;
+      var y = b.color;
+      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+  }
+
+  else if (key == 'value') {
+
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].value == 'Skip') {
+        array[i].value = 10;
       }
     }
 
-    redHandValues.sort().reverse();
-    yellowHandValues.sort().reverse();
-    greenHandValues.sort().reverse();
-    blueHandValues.sort().reverse();
+    array = array.sort(function(a, b) {
+      var x = a.value;
+      var y = b.value;
+      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
 
-    let filteredHand = []
-
-
-    for (let i = 0; i < blueHandValues.length; i++) {
-      filteredHand.push({color: 'Blue', value: blueHandValues[i], file: 'Blue_' + blueHandValues[i] + '.png'})
-    }
-    for (let i = 0; i < greenHandValues.length; i++) {
-      filteredHand.push({color: 'Green', value: greenHandValues[i], file: 'Green_' + greenHandValues[i] + '.png'})
-    }
-    for (let i = 0; i < yellowHandValues.length; i++) {
-      filteredHand.push({color: 'Yellow', value: yellowHandValues[i], file: 'Yellow_' + yellowHandValues[i] + '.png'})
-    }
-    for (let i = 0; i < redHandValues.length; i++) {
-      filteredHand.push({color: 'Red', value: redHandValues[i], file: 'Red_' + redHandValues[i] + '.png'})
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].value == 10) {
+        array[i].value = 'Skip';
+      }
     }
 
-    return filteredHand;
+    return array;
 
   }
+}
 
 }

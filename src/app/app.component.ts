@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { PlayerComponent } from './player/player.component';
+import { OpponentComponent } from './opponent/opponent.component';
 import { TricksService } from './tricks.service';
 
 @Component({
@@ -21,16 +22,21 @@ export class AppComponent {
   @ViewChild(PlayerComponent)
   private player: PlayerComponent;
 
+  @ViewChild(OpponentComponent)
+  private opponent: OpponentComponent;
+
 //WISHLIST:
 // - (DONE) Remove "pile" object in favor of one face up card, and only deck object.
 // - (DONE) opponent’s skip needs to work.
 // - (DONE) Implement Twitter Bootstrap.
 // - (DONE) Fix centering problem in view.
-// - (DONE) Sort button for hand by color, value.
-// - (NOPE) Autosort, and indicate what the newest-drawn cards are.
-// - Fix centering for player's panel heading.
+// - (DONE) Sort buttons for hand by color or value.
+// - (DONE) Animate player's hand.
+// - (DONE) Fix centering for player's panel heading.
+// - Fix padding on right of hand panels when overflow occurs.
 // - stop game at win
 // - try to combine event emitters: "done" and "won"
+// - Restructure parent-child relationships around ViewChild.
 
   ngOnInit() {
     this.tricks.buildDeck(this.deck);                      //Adds 84 of 108 Uno cards to deck object.
@@ -83,8 +89,12 @@ export class AppComponent {
     }
   }
 
-  sortPlayerHand() {
-    this.player.sortHand();
+  sortPlayerHandColor() {
+    this.player.hand = this.tricks.sortByKey(this.player.hand, 'color');
+  }
+
+  sortPlayerHandValue() {
+    this.player.hand = this.tricks.sortByKey(this.player.hand, 'value');
   }
 
 }

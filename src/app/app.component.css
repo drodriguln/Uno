@@ -10,10 +10,14 @@ img {
   padding-right: 10px;
 }
 
-.panel-body-background-blue {
-  background: #dbe7f1;
+.panel-background-blue-gray {
+  background: #688FC1;
 }
 
-.panel-body-background-gray {
-  	background: #F8F8F8
+.panel-background-blue {
+  background: #F0F7FF;
+}
+
+.panel-background-red {
+  background: #FFF5F5;
 }

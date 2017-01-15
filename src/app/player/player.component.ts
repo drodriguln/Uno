@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TricksService } from '../tricks.service';
-import { AppComponent} from '../app.component';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-player',
@@ -25,7 +25,7 @@ export class PlayerComponent implements OnInit {
 
   receiveCardFromParent() {
     //Draw a card to the player's hand.
-    this.hand.push(this.tricks.drawCard(this.deck));
+    this.hand = [this.tricks.drawCard(this.deck)].concat(this.hand);
   }
 
   placeCard(i: number) {
@@ -46,10 +46,6 @@ export class PlayerComponent implements OnInit {
         }
       }
     }
-  }
-
-  sortHand() {
-    this.hand = this.tricks.sortHandColorValueService(this.hand);
   }
 
 }
