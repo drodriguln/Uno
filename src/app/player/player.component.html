@@ -1,7 +1,15 @@
 <div id="hand">
-  <ul class="list-inline center-block text-center list-inline gallery">
+  <ul class="list-inline center-block text-center" *ngIf="this.hand.length > 0">
     <li class="card-move" *ngFor="let card of hand; let i = index">
       <img class="zoom" (click)="placeCard(i)" src="./assets/{{card.file}}" />
+    </li>
+    <li>
+      &nbsp;
+    </li>
+  </ul>
+  <ul class="list-inline center-block text-center">
+    <li *ngIf="this.hand.length == 0">
+      <img src="./assets/card_back_win.png" />
     </li>
   </ul>
 </div>

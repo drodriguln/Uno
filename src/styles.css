@@ -1,13 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body, .panel-background-gray {
-  background: #F0EFEF;
-}
-
-.horizontal-scrollbar {
-  white-space: nowrap;
-  overflow-y: hidden;
-  overflow-x: scroll;
+  background: #F4F4F4;
 }
 
 /*

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { PlayerComponent } from './player/player.component';
 import { OpponentComponent } from './opponent/opponent.component';
 import { TricksService } from './tricks.service';
@@ -16,6 +16,7 @@ export class AppComponent {
   isOpponentsTurn: boolean = false;                        //Check if player's turn has ended.
   deck: Object[] = [];                                     //The deck object array for dealing and drawing for children.
   topCard;                                                 //Initialize the card last placed in the pile object.
+  colorClass;
 
   constructor(private tricks: TricksService, private cdRef:ChangeDetectorRef) { }
 
@@ -25,74 +26,69 @@ export class AppComponent {
   @ViewChild(OpponentComponent)
   private opponent: OpponentComponent;
 
-//WISHLIST:
-// - (DONE) Remove "pile" object in favor of one face up card, and only deck object.
-// - (DONE) opponent’s skip needs to work.
-// - (DONE) Implement Twitter Bootstrap.
-// - (DONE) Fix centering problem in view.
-// - (DONE) Sort buttons for hand by color or value.
-// - (DONE) Animate player's hand.
-// - (DONE) Fix centering for player's panel heading.
-// - Fix padding on right of hand panels when overflow occurs.
-// - stop game at win
-// - try to combine event emitters: "done" and "won"
-// - Restructure parent-child relationships around ViewChild.
-
   ngOnInit() {
     this.tricks.buildDeck(this.deck);                      //Adds 84 of 108 Uno cards to deck object.
     this.tricks.shuffleCards(this.deck);                   //Shuffles items in deck object.
     this.topCard = this.tricks.drawCard(this.deck);        //Places next card in deck in the card pile.
+    this.tricks.dealCards(this.player.hand, this.deck);
+    this.colorClass = this.topCard.color.toLowerCase();
+  }
+
+  ngOnChanges() {
+    if (this.isOpponentsTurn) {
+      this.announcer = 'YOUR TURN';
+    } else {
+      this.announcer = 'OPPONENT\'S TURN';
+    }
+    if (this.opponent.hand.length == 0) {
+      this.announcer = 'THE OPPONENT HAS WON THE MATCH'
+    }
+    if (this.player.hand.length == 0) {
+
+
+    }
   }
 
   //Execute when player has picked a card in the player component.
   playerDone(card) {
     this.topCard = card[0];                //Make player's picked card the top card.
+    this.colorClass = this.topCard.color.toLowerCase();
     this.deck.push(card[0]);
     this.tricks.shuffleCards(this.deck);
-    if (card[0].value == 'Skip') {
-      this.announcer = 'YOUR TURN';        //Resets turn status. Defensive programming.
-      this.isOpponentsTurn = false;        //Player's turn has restarted.
-    } else {
-      this.announcer = 'OPPONENT\'S TURN'; //Update turn status.
-      this.isOpponentsTurn = true;         //Acknowledge the opponent's turn has started.
-    }
-    this.cdRef.detectChanges();            //Forces the Angular runtime to accept object changes.
+    this.isOpponentsTurn = this.tricks.determineTurn(card[0], false);
+    let annObject = this.tricks.prepareAnnouncement(this.isOpponentsTurn, this.opponent.hand, this.player.hand);
+    let matchWon = annObject.matchWon;
+    this.announcer = annObject.text;
+    if (matchWon) { this.isOpponentsTurn = !this.isOpponentsTurn; } //Prevents the next turn from occuring after a win.
+    this.cdRef.detectChanges();                                     //Forces the Angular runtime to accept object changes.
   }
 
   //Execute when opponent has picked a card in the opponent component.
   opponentDone(card) {
-    this.topCard = card[0];                //Make opponent's picked card the top card.
-    this.deck.push(card[0]);
-    this.tricks.shuffleCards(this.deck);
-    if (card[0].value == 'Skip') {
-      this.announcer = 'OPPONENT\'S TURN'; //Update turn status.
-      this.isOpponentsTurn = true;         //Acknowledge the player's turn has started.
-    } else {
-      this.announcer = 'YOUR TURN';        //Update turn status.
-      this.isOpponentsTurn = false;        //Acknowledge the opponent's turn has started.
-    }
+    this.deck.push(this.topCard); //Move current top card into the deck.
+    this.tricks.shuffleCards(this.deck); //Shuffle the edck after adding card.
+    this.topCard = card[0]; //Make opponent's picked card the top card.
+    this.colorClass = this.topCard.color.toLowerCase(); //Change color of pile panel according to new top card.
+    this.isOpponentsTurn = this.tricks.determineTurn(card[0], true); //determine opponents turn based on who played the card and the card value.
+    let annObject = this.tricks.prepareAnnouncement(this.isOpponentsTurn, this.opponent.hand, this.player.hand); //Returns {announcer text, match won?}
+    let matchWon = annObject.matchWon;
+    this.announcer = annObject.text;
+    if (matchWon) { this.isOpponentsTurn = !this.isOpponentsTurn; } //Prevents the next turn from occuring after a win.
   }
 
-  playerWon(e) {
-    console.log('player has won');
-    this.announcer = 'YOU HAVE WON THE MATCH'
-  }
-
-  opponentWon(e) {
-    console.log('opponent has won');
-    this.announcer = 'THE OPPONENT HAS WON THE MATCH'
-  }
-
+  //Pops card from deck into the player's hand, then concats it after to push into index 0
   drawPlayerCard() {
     if (!this.isOpponentsTurn) {
-      this.player.receiveCardFromParent();
+      this.player.hand = [this.tricks.drawCard(this.deck)].concat(this.player.hand);
     }
   }
 
+  //Tied to button to sort hand by color.
   sortPlayerHandColor() {
     this.player.hand = this.tricks.sortByKey(this.player.hand, 'color');
   }
 
+  //Tied to button to sort hand by value.
   sortPlayerHandValue() {
     this.player.hand = this.tricks.sortByKey(this.player.hand, 'value');
   }

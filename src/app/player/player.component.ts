@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TricksService } from '../tricks.service';
 import { AppComponent } from '../app.component';
 
@@ -7,7 +7,7 @@ import { AppComponent } from '../app.component';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent {
 
   hand = [];                                 //The hand object array for the player.
   @Input() isOpponentsTurn: boolean;         //Check if player's turn has ended.
@@ -18,16 +18,6 @@ export class PlayerComponent implements OnInit {
 
   constructor(private tricks: TricksService) { }
 
-  ngOnInit() {
-    //Deal first cards from the deck to the player's hand through the Tricks service.
-    this.tricks.dealCards(this.hand, this.deck);
-  }
-
-  receiveCardFromParent() {
-    //Draw a card to the player's hand.
-    this.hand = [this.tricks.drawCard(this.deck)].concat(this.hand);
-  }
-
   placeCard(i: number) {
     //Prevent player from placing any more cards during opponent's turn.
     if (!this.isOpponentsTurn) {
@@ -35,15 +25,9 @@ export class PlayerComponent implements OnInit {
       if (this.topCard.value == this.hand[i].value || this.topCard.color == this.hand[i].color) {
         //Takes the selected card from the hand.
         let selectedCard = this.hand.splice(i, 1);
-        //Tells the parent that the player has run out of cards, and won the match.
-        if (this.hand.length == 0) {
-          //Notifies the parent that the player has run out of cards, and won the match.
-          this.playerWon.emit();
-        } else {
-          //Notifies the parent that the opponent's turn has ended,
-          //and sends the selected card from the hand to the deck.
-          this.playerDone.emit(selectedCard);
-        }
+        //Notifies the parent that the opponent's turn has ended,
+        //and sends the selected card from the hand to the deck.
+        this.playerDone.emit(selectedCard);
       }
     }
   }

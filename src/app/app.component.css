@@ -10,8 +10,10 @@ img {
   padding-right: 10px;
 }
 
-.panel-background-blue-gray {
-  background: #688FC1;
+.horizontal-scrollbar {
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 
 .panel-background-blue {
@@ -20,4 +22,20 @@ img {
 
 .panel-background-red {
   background: #FFF5F5;
+}
+
+.pile-background-color-red {
+  background: #EC9791;
+}
+
+.pile-background-color-yellow {
+  background: #F4F3B8;
+}
+
+.pile-background-color-green {
+  background: #96EC91;
+}
+
+.pile-background-color-blue {
+  background: #91B3EC;
 }

@@ -1,6 +1,6 @@
 import { UnoPage } from './app.po';
 
-describe('uno App', function() {
+describe('UnoNino App', function() {
   let page: UnoPage;
 
   beforeEach(() => {

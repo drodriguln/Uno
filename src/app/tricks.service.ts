@@ -27,6 +27,37 @@ export class TricksService {
     }
   }
 
+  //Determines if the player or opponent's recent card play grants another turn.
+  determineTurn(card, isOpponentsPlay) {
+    if (isOpponentsPlay) {
+      if (card.value == 'Skip') {
+        return true; //'OPPONENT\'S TURN';
+      } else {
+        return false; //'YOUR TURN';
+      }
+    } else {
+      if (card.value == 'Skip') {
+        return false; //'YOUR TURN';
+      } else {
+        return true; //'OPPONENT\'S TURN';
+      }
+    }
+  }
+
+  prepareAnnouncement(isOpponentsTurn, opponentsHand, playersHand) {
+    if (opponentsHand.length == 0) {
+      return {text: 'THE OPPONENT HAS WON THE MATCH!', matchWon: true};
+    } else if (playersHand.length == 0) {
+      return {text: 'YOU HAVE WON THE MATCH!', matchWon: true};
+    } else {
+      if (isOpponentsTurn) {
+        return {text: 'OPPONENT\'S TURN', matchWon: false};
+      } else {
+        return {text: 'YOUR TURN', matchWon: false};
+      }
+    }
+  }
+
   //Adds 84 Uno cards to the deck object (108 regular cards without 8 reverses, 8 draw two, 4 draw four, and 4 wild cards).
   buildDeck(cards: Object[]) {
 

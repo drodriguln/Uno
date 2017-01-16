@@ -1,7 +1,15 @@
 <div id="hand" >
-  <ul class="list-inline center-block text-center">
+  <ul *ngIf="this.hand.length > 0" class="list-inline center-block text-center">
     <li *ngFor="let card of hand">
       <img src="./assets/card_back_alt.png" />
+    </li>
+    <li>
+      &nbsp;
+    </li>
+  </ul>
+  <ul class="list-inline center-block text-center">
+    <li *ngIf="this.hand.length == 0">
+      <img src="./assets/card_back_win.png" />
     </li>
   </ul>
 </div>
