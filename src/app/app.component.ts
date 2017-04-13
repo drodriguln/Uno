@@ -18,13 +18,13 @@ export class AppComponent {
   topCard;                                                 //Initialize the card last placed in the pile object.
   colorClass;
 
-  constructor(public tricks: TricksService, public cdRef:ChangeDetectorRef) { }
+  constructor(private tricks: TricksService, private cdRef:ChangeDetectorRef) { }
 
   @ViewChild(PlayerComponent)
-  public player: PlayerComponent;
+  private player: PlayerComponent;
 
   @ViewChild(OpponentComponent)
-  public opponent: OpponentComponent;
+  private opponent: OpponentComponent;
 
   ngOnInit() {
     this.tricks.buildDeck(this.deck);                      //Adds 84 of 108 Uno cards to deck object.
