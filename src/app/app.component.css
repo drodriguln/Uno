@@ -4,10 +4,17 @@ li {
 }
 
 img {
-  max-width: 145px;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+@media (max-width: 768px) {
+  img { max-width: 120px; }
+}
+
+@media (min-width: 769px) {
+  img { max-width: 145px; }
 }
 
 .horizontal-scrollbar {

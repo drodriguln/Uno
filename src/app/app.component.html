@@ -11,10 +11,10 @@
           <div class="panel-heading text-center">
             <div class="container-fluid panel-container">
               <div class="col-xs-4 text-left">
-                {{this.opponent.hand.length}} Cards
-              </div>
-              <div class="col-xs-4 text-center">
                 OPPONENT
+              </div>
+              <div class="col-xs-8 text-right">
+                {{this.opponent.hand.length}} Cards
               </div>
             </div>
           </div>
@@ -47,12 +47,9 @@
           <div class="panel-heading">
             <div class="container-fluid panel-container">
               <div class="col-xs-4 text-left">
-                {{this.player.hand.length}} Cards
-              </div>
-              <div class="col-xs-4 text-center">
                 YOU
               </div>
-              <div class="col-xs-4 text-right">
+              <div class="col-xs-8 text-right">
                 Sort by:&nbsp;
                 <div class="btn-group">
                   <button type="button" class="btn btn-default btn-xs" (click)="sortPlayerHandColor()">Color</button>
